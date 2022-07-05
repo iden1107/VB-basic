@@ -37,6 +37,19 @@
         Dim day As Date = Now
         MsgBox(Now.ToString("HH:mm:ss"))
     End Sub
+
+    'eの中身を操作
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        'eはeventArgクラス型
+        'マウスの操作はmouseEvnetArg型
+        'クラス型どうしのキャストをdirectCast()で実行する
+        Dim hoge As MouseEventArgs = DirectCast(e, MouseEventArgs)
+        Debug.WriteLine(hoge.X)
+    End Sub
+
+    '型の取得
+    Dim str As String = "foo"
+    Dim t3 As Type = str.GetType() ' Stringインスタンスからの型情報の取得
 End Class
 
 
