@@ -264,5 +264,115 @@ Public Class Form1
 End Class
 
 
+
+
 'クラス
 
+'変数（フィールド）
+'メソッド
+'上二つを合わせてメンバという
+Class Sample
+    Public aaa As String = "変数" 'Dimは省略可
+    Public Sub bbb()
+        Console.WriteLine("メソッド")
+    End Sub
+End Class
+
+'インスタンス化　sampleクラスからxxxを作り出す
+Module Program
+    Sub Main(args As String())
+        Dim xxx = New Sample()
+        xxx.bbb()　'メソッドの
+    End Sub
+End Module
+
+
+
+'コンストラクタ
+'インスタンス作成時に呼ばれるメソッド。初期化するときに使われる
+Class Sample
+    Public aaa As String
+    'コンストラクタでaaaの値をセット
+    Sub New()
+        aaa = "変数"
+    End Sub
+
+    Public Sub bbb()
+        Console.WriteLine("メソッド")
+    End Sub
+End Class
+'インスタンス化
+Module Program
+    Sub Main()
+        Dim xxx = New Sample()
+        Console.WriteLine(aaa) 'aaaの"変数"が出力
+    End Sub
+End Module
+
+
+'インスタンスの時に値をセットする
+Class Sample
+    Public aaa As String
+    Sub New(ccc As String)　'②cccには"hoge"が格納
+        aaa = ccc　'③フィールドのaaaにcccが代入
+    End Sub
+
+    Public Sub bbb()
+        Console.WriteLine("メソッド")
+    End Sub
+End Class
+'インスタンス化
+Module Program
+    Sub Main()
+        Dim xxx = New Sample("hoge")　'①値をセット
+        Console.WriteLine(xxx.aaa) '①から③を経て"hoge"が出力
+    End Sub
+End Module
+
+
+'オーバーロード
+'パラメーターの型や数が異なれば同じメソッド名で複数定義できる
+Class Sample
+    Public aaa As String
+    '①aaaを初期化する２つのコンストラクタがある
+    '②それぞれ型が異なって定義されている
+    Sub New(ccc As String)
+        aaa = "文字列です"
+    End Sub
+
+    Sub New(ccc As Integer)
+        aaa = "数値です"
+    End Sub
+End Class
+Module Program
+    Sub Main())
+        '③インスタンス生成時は"hoge"と文字列なのでこの場合は上のコードが適用される
+        'コンパイラが適用するものを分けている
+        Dim xxx = New Sample("hoge")
+        Console.WriteLine(xxx.aaa)
+    End Sub
+End Module
+
+
+'オーバーロード（メソッド）
+Class Sample
+    'bbb()と同名のメソッドが３つあるがそれぞれ引数が異なっている
+    Public Sub bbb(a As Integer)
+        Console.WriteLine(a)
+    End Sub
+
+    Public Sub bbb(a As Integer, b As Integer)
+        Console.WriteLine(a + b)
+    End Sub
+    Public Sub bbb(a As Integer, c As String)
+        Console.WriteLine(a & c)
+    End Sub
+End Class
+Module Program
+    Sub Main()
+        Dim xxx = New Sample()
+        xxx.bbb(10, 20)　'数値が２つ渡されているので真ん中が適用
+        xxx.bbb(1923, "年") '数値と文字が渡されているので下が適用 
+        '同じメソッド名を使いまわせるメリットがある
+    End Sub
+End Module
