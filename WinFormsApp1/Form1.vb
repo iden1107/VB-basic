@@ -280,7 +280,7 @@ End Class
 
 'インスタンス化　sampleクラスからxxxを作り出す
 Module Program
-    Sub Main(args As String())
+    Sub Main()
         Dim xxx = New Sample()
         xxx.bbb()　'メソッドの
     End Sub
@@ -376,3 +376,57 @@ Module Program
         '同じメソッド名を使いまわせるメリットがある
     End Sub
 End Module
+
+
+
+'継承
+Public Class Sample
+    Public Sub bbb()
+        Console.WriteLine("メソッド")
+    End Sub
+End Class
+
+
+Public Class SampleChild 'Sampleクラスから継承
+    Inherits Sample
+End Class
+
+
+
+'オーバーライド
+Public Class Sample
+    Public Overridable Sub bbb()
+        Console.WriteLine("メソッド")
+    End Sub
+End Class
+
+Public Class SampleChild
+    Inherits Sample
+    Public Overrides Sub bbb()
+        Console.WriteLine("上書き")
+    End Sub
+End Class
+
+
+'アクセス修飾子
+'Public クラス外部からも可能
+'Firend　同一プログラム、ソリューション内から可能
+'Protected　クラス内部、サブクラスから可能
+'Private　クラス内部のみ可能
+
+
+'プロパティ
+'クラス内の変数（フィールド）はprivateで宣言することが推奨される
+'そのため変数にアクセスするにはメソッドを経由する方法がある
+'それを便利にするのがプロパティ
+Class Sample
+    Private aaa As String = "文字"
+End Class
+Module Program
+    Sub Main()
+        Dim xxx = New Sample()
+        Console.WriteLine(xxx.aaa)　'このままでは当然アクセスできな
+    End Sub
+End Module
+
+
