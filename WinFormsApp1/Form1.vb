@@ -103,10 +103,26 @@
         aaa.Remove("hoge") '削除
         aaa.Clear() 'データの全削除。空の要素は残る（個数はそのまま)
         aaa = Nothing '要素も削除。完全初期化
-        aaa.Count() 'データの個数
+        aaa.Count 'データの個数
+        aaa.Contains("hoge") '指定の要素があるか 返り値はboolean
         Console.WriteLine(aaa(0))
     End Sub
 
+    'dictionay型
+    Sub Main()
+        Dim aaa As New Dictionary(Of String, Integer) From {
+            {"国語", 65},
+            {"算数", 80},
+            {"理科", 70}
+         }
+
+        Console.WriteLine(aaa("国語")) '65と出力
+
+        For Each bbb In aaa
+            Console.WriteLine(bbb.Key) '国語　算数　理科
+            Console.WriteLine(bbb.Value) '65 80 70と出力される
+        Next
+    End Sub
 
     '演算子
     Sub main()
@@ -215,6 +231,21 @@
         Do
             Console.WriteLine(aaa)
         Loop While aaa = 5
+    End Sub
+
+    'エラー処理
+    Sub Main()
+        Try
+            Dim x As Integer, y As Integer
+            x = 4
+            y = "hoge"
+            Console.WriteLine(x / y)
+
+        Catch ex As ArithmeticException
+            Console.WriteLine(ex.Message)
+        Finally
+            Console.WriteLine("処理が終了しました")
+        End Try
     End Sub
 End Class
 
