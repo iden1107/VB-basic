@@ -1,13 +1,13 @@
 ﻿Public Class Control
-    'イベントプロシージャ
+    '---イベントプロシージャ
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         '第１引数はObject型、第２引数はEventArgs型
         Button1.BackColor = Color.Pink
     End Sub
 
+    '入力キーの取得
 
-
-    'タイマー
+    '---タイマー
     Dim n As Integer = 0　'変数を宣言
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

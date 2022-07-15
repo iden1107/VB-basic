@@ -319,7 +319,7 @@ End Module
 
 
 
-'コンストラクタ
+'---コンストラクタ
 'インスタンス作成時に呼ばれるメソッド。初期化するときに使われる
 Class Sample
     Public aaa As String
@@ -361,7 +361,7 @@ Module Program
 End Module
 
 
-'オーバーロード
+'---オーバーロード
 'パラメーターの型や数が異なれば同じメソッド名で複数定義できる
 Class Sample
     Public aaa As String
@@ -410,7 +410,7 @@ End Module
 
 
 
-'継承
+'---継承
 Public Class Sample
     Public Sub bbb()
         Console.WriteLine("メソッド")
@@ -424,7 +424,7 @@ End Class
 
 
 
-'オーバーライド
+'---オーバーライド
 Public Class Sample
     Public Overridable Sub bbb()
         Console.WriteLine("メソッド")
@@ -439,14 +439,14 @@ Public Class SampleChild
 End Class
 
 
-'アクセス修飾子
+'---アクセス修飾子
 'Public クラス外部からも可能
 'Firend　同一プログラム、ソリューション内から可能
 'Protected　クラス内部、サブクラスから可能
 'Private　クラス内部のみ可能
 
 
-'プロパティ
+'---プロパティ
 'クラス内の変数（フィールド）はprivateで宣言することが推奨される
 'そのため変数にアクセスするにはメソッドを経由する方法がある
 'それを便利にするのがプロパティ
@@ -460,4 +460,80 @@ Module Program
     End Sub
 End Module
 
+'そこでアクセサ(get,set)を使い値を操作できるようにする
+Class Sample
+    Private _number As Integer = 50
+    Public Property Number() As Integer
+        Get
+            Return _number
+
+        End Get
+        Set(value As Integer)
+            _number = value
+        End Set
+    End Property
+End Class
+Module Program
+    Sub Main()
+        Dim xxx = New Sample()
+        Console.WriteLine(xxx.Number) 'getの50が出力
+
+        xxx.Number = 100
+        Console.WriteLine(xxx.Number) '100がsetされたので100が出力
+    End Sub
+End Module
+
+'上記のようにgetとsetをそのまま返すだけではpubicでフィールドを設定することとさほど変わらない
+'setにロジックを加えることで値の設定に条件をつけることなどができる
+Class Sample
+    Private _number As Integer = 50
+    Public Property Number() As Integer
+        Get
+            Return _number
+
+        End Get
+        Set(value As Integer) '0でない場合のみ任意の値を設定できる
+            If value = Not 0 Then
+                _number = value
+            End If
+        End Set
+    End Property
+End Class
+
+'Getしかない時はReadOnlyを付ける
+Class Sample
+    Private _number As Integer = 0
+    Public ReadOnly Property Number() As Integer
+        Get
+            Return _number
+        End Get
+    End Property
+End Class
+
+'Setしかない時はWriteOnlyを付ける
+Class Sample
+    Private _number As Integer = 0
+    Public WriteOnly Property Number() As Integer
+        Set(ByVal value As Integer)
+            _number = value
+        End Set
+    End Property
+End Class
+
+'自動実装プロパティ　getとsetを省略できる記述方法
+'ロジックが必要な場合はgetとsetを記述しなければならない
+'自動実装プロパティと ReadOnly、WriteOnly キーワードの併用もできない
+Class Sample
+    Public Property Number() As Integer
+    'Public Property Number() As Integer = 100 初期値の設定もできる
+
+End Class
+Module Program
+    Sub Main()
+        Dim xxx = New Sample()
+        Console.WriteLine(xxx.Number)
+        xxx.Number = 200
+        Console.WriteLine(xxx.Number)
+    End Sub
+End Module
 
