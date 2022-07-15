@@ -537,3 +537,34 @@ Module Program
     End Sub
 End Module
 
+
+
+'---既定のプロパティ (インデクサ)
+'クラスのインスタンスを配列のようにインデックスで呼び出せるようにしたもの
+Class Sample
+    Private arr() As String
+    Sub New(ByVal size As Integer)
+        arr = New String(size) {}
+    End Sub
+    Default Property Item(ByVal index As Integer) As String
+        Get
+            Return arr(index)
+        End Get
+        Set(ByVal value As String)
+            arr(index) = value
+        End Set
+    End Property
+End Class
+
+Module Program
+    Sub Main()
+        Dim xxx = New Sample(3)
+        xxx(1) = "hoge"
+        xxx(2) = "foo"
+        xxx(3) = "hogehoge"
+
+        Console.WriteLine(xxx(2))
+    End Sub
+End Module
+
+
