@@ -5,6 +5,38 @@
         Button1.BackColor = Color.Pink
     End Sub
 
+    'DataGridViewにデータソースを入れる
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim dt As DataTable
+        Dim dr As DataRow
+
+        'データテーブル作成
+        dt = New DataTable()
+
+        'カラムの設定
+        dt.Columns.Add(New DataColumn("ID番号", GetType(String)))
+        dt.Columns.Add(New DataColumn("名前", GetType(String)))
+
+        'データ行を追加していく
+        dr = dt.NewRow()
+        dr(0) = "001"
+        dr(1) = "山田"
+        dt.Rows.Add(dr)
+
+        dr = dt.NewRow()
+        dr(0) = "002"
+        dr(1) = "田中"
+        dt.Rows.Add(dr)
+
+        dr = dt.NewRow()
+        dr(0) = "003"
+        dr(1) = "佐藤"
+        dt.Rows.Add(dr)
+
+        'DataSourceにDataTableを設定
+        DataGridView1.DataSource = dt
+    End Sub
+
     '入力キーの取得
     Private Sub TextBox1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBox1.KeyPress
         Debug.WriteLine(e.KeyChar)
