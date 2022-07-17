@@ -56,6 +56,16 @@
         MsgBox(day.ToString("yy-MM-dd")) '20-06-27
         day = Now '現在日付時刻
         MsgBox(Now.ToString("HH:mm:ss")) '時刻
+        '現在の日付と時刻を取得
+        Debug.WriteLine(Date.Now) 'Date型として出力
+
+
+        '型の取得
+        Dim aaa As String = "hoge"
+        '型の一致を検証する方法
+        If aaa.GetType = GetType(String) Then
+            Console.WriteLine("一致")
+        End If
     End Sub
 
 

@@ -6,6 +6,9 @@
     End Sub
 
     '入力キーの取得
+    Private Sub TextBox1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBox1.KeyPress
+        Debug.WriteLine(e.KeyChar)
+    End Sub
 
     '---タイマー
     Dim n As Integer = 0　'変数を宣言
@@ -21,5 +24,20 @@
         '設定した秒ごとに処理する内容
         n += 1 'nを１増やす
         Label1.Text = n.ToString() 'ラベルの表示内容を更新
+    End Sub
+
+    '---コントロールの取得
+    Private Sub xxx()
+        'Me.Controlsですべてのcontrolが格納される
+        Debug.WriteLine(Me.Controls)
+        'コントロールの数
+        Debug.WriteLine(Me.Controls.Count)
+    End Sub
+
+    '---右クリックの判定
+    Private Sub Form1_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
+        If e.Button = MouseButtons.Right Then
+            Debug.WriteLine("右クリック")
+        End If
     End Sub
 End Class
