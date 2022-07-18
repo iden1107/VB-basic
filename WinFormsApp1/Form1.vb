@@ -73,7 +73,7 @@
     Sub main()
         '配列
         Dim aaa(3) As String
-        aaa(0) = "hoge"
+        aaa(0) = "hoge"b
 
         '配列変数を後から変更
         ReDim aaa(5)
@@ -323,7 +323,7 @@ End Class
 Module Program
     Sub Main()
         Dim xxx = New Sample()
-        xxx.bbb()　'メソッドの
+        xxx.bbb()　'メソッドの呼び出し
     End Sub
 End Module
 
@@ -335,6 +335,7 @@ Class Sample
     Public aaa As String
     'コンストラクタでaaaの値をセット
     Sub New()
+        'Me.aaa = "変数" 　　この形式でもよい
         aaa = "変数"
     End Sub
 
@@ -346,7 +347,7 @@ End Class
 Module Program
     Sub Main()
         Dim xxx = New Sample()
-        Console.WriteLine(aaa) 'aaaの"変数"が出力
+        Console.WriteLine(xxx.aaa) 'aaaの"変数"が出力
     End Sub
 End Module
 
@@ -549,7 +550,7 @@ End Module
 
 
 
-'---既定のプロパティ (インデクサ)
+'---既定のプロパティ (C#ではインデクサ)
 'クラスのインスタンスを配列のようにインデックスで呼び出せるようにしたもの
 Class Sample
     Private arr() As String
@@ -578,3 +579,46 @@ Module Program
 End Module
 
 
+'---staticクラス = module
+'static修飾子 = shared修飾子
+'モジュールは、メンバが暗黙的に Shared である型
+'オブジェクト指向ではないため使用は推奨されない
+'Shared修飾子を付与した変数は、インスタンスを作成しなくても存在
+
+
+Class Sample
+    Public Shared aaa As String = "変数"
+    Public Shared Sub bbb()
+        Debug.WriteLine("メソッド")
+    End Sub
+End Class
+
+
+Sub Main()
+    Console.WriteLine(Sample.aaa)
+    'インスタンスを生成せずに直接使える
+    bbb() 'メソッドも同様に直接呼びだし
+End Sub
+
+
+'---抽象クラス
+'複数人で開発を行う場合に実装レベルのルールを作れる意図
+'継承してもらうことを前提にしているクラスで、それ自身をインスタンス化することはできない
+'継承された派生クラスでは抽象メソッドを必ずオーバーライドしなければならない制約がある
+Public MustInherit Class Sample '①抽象クラス
+    Public MustOverride Sub Method1()
+End Class
+
+Public Class Class　'②継承した具象クラス
+    Inherits Sample
+    Public Overrides Sub Method1()
+        Debug.WriteLine("hoge")
+    End Sub
+End Class
+
+
+Private Sub main()
+    '③具象クラスからインスタンス化
+    Dim xxx = New ClassSample()
+    xxx.Method1()
+End Sub
