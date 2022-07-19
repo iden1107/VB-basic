@@ -579,8 +579,8 @@ Module Program
 End Module
 
 
-'---staticクラス = module
-'static修飾子 = shared修飾子
+'--- moduleクラス(C#:staticクラス)
+' shared修飾子(C#:static修飾子)
 'モジュールは、メンバが暗黙的に Shared である型
 'オブジェクト指向ではないため使用は推奨されない
 'Shared修飾子を付与した変数は、インスタンスを作成しなくても存在
@@ -622,3 +622,30 @@ Private Sub main()
     Dim xxx = New ClassSample()
     xxx.Method1()
 End Sub
+
+
+
+'インターフェイス
+'中身の処理は記述されない
+'クラスで実装(記述)することで動作する
+'継承先でメソッドのオーバーライドを強制
+Interface ISample
+    Sub ShowMessage()
+End Interface
+
+Public Class Sample
+    Implements ISample 'インターフェースを実装
+    Public Sub ShowMessage() Implements ISample.ShowMessage
+        Debug.WriteLine("派生クラス")
+    End Sub
+End Class
+
+
+'---構造体
+'クラス（参照型）と似ている
+'値型。継承などができない
+'軽量のオブジェクトを表すのに適している
+'大量のデータを生成する場合に用いられる
+
+
+
