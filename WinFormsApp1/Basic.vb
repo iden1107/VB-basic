@@ -1,4 +1,4 @@
-﻿Public Class Form1
+﻿Public Class Basic
 
 
     'eの中身を操作
@@ -263,7 +263,7 @@ End Class
 
 
 '関数
-Public Class Form1
+Public Class Basic
     '引数
     Private Sub xxx(ByVal aaa As Integer, ByVal bbb As String) 'byvalは省略可
         Console.WriteLine(aaa)
@@ -625,7 +625,7 @@ End Sub
 
 
 
-'インターフェイス
+'---インターフェイス
 '中身の処理は記述されない
 'クラスで実装(記述)することで動作する
 '継承先でメソッドのオーバーライドを強制
@@ -639,6 +639,99 @@ Public Class Sample
         Debug.WriteLine("派生クラス")
     End Sub
 End Class
+
+'---ジェネリック
+'引数の型を任意のものが入る
+'型を指定した例では、型が異なる場合エラーになる
+'クラスをインスタンス化した際、型だけ異なる場合に
+'その度クラスを作らなくてもよくなることがメリット
+Class Aaa
+    Public bbb As Integer
+End Class
+
+Public Sub Fun1()
+    Dim xxx = New Aaa()
+    xxx.bbb = 100
+    Debug.WriteLine(xxx.bbb) '100で作ったインスタンスではOKでも
+End Sub
+
+Public Sub Fun2()
+    Dim xxx = New Aaa()
+    xxx.bbb = "hoge"
+    Debug.WriteLine(xxx.bbb) '文字のインスタンスはエラーになる
+End Sub
+
+
+'ジェネリックを使用した場合
+Class Aaa(Of T)
+    Public bbb As T
+End Class
+
+
+Public Sub Afun()
+    Dim xxx As New Aaa(Of String)
+    xxx.bbb = "hoge"
+    Debug.WriteLine(xxx.bbb)
+End Sub
+
+Public Sub Bfun()
+    Dim xxx As New Aaa(Of Integer)
+    xxx.bbb = 100
+    Debug.WriteLine(xxx.bbb)
+End Sub
+
+
+
+'---名前空間
+'クラス名の衝突や、クラスの分類などに使える
+Namespace Aaa
+    Public Class Bbb
+        Public Sub Ccc()
+            Debug.WriteLine("Aaa名前空間のCccメソッド実行")
+        End Sub
+    End Class
+
+    Public Class Ddd
+        Public Sub Eee()
+            Debug.WriteLine("Aaa名前空間のDddメソッド実行")
+        End Sub
+    End Class
+End Namespace
+
+
+Public Class Form1
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim xxx = New Aaa.Bbb()
+        xxx.Ccc()
+    End Sub
+End Class
+
+'---importによる名前空間
+Imports WinFormsApp1.Aaa
+
+Namespace Aaa
+    Public Class Bbb
+        Public Sub Ccc()
+            Debug.WriteLine("Aaa名前空間のCccメソッド実行")
+        End Sub
+    End Class
+
+    Public Class Ddd
+        Public Sub Eee()
+            Debug.WriteLine("Aaa名前空間のDddメソッド実行")
+        End Sub
+    End Class
+End Namespace
+
+
+Public Class Form1
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        'ここで名前空間を省略できる
+        Dim xxx = New Bbb()
+        xxx.Ccc()
+    End Sub
+End Class
+
 
 
 '---構造体
