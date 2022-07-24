@@ -810,3 +810,21 @@ Module Program
         Console.WriteLine(Color.RED.ToString)
     End Sub
 End Module
+
+'名称をループで取り出す
+Module Program
+    Sub Main(args As String())
+        For Each s In [Enum].GetNames(GetType(Color))
+            Console.WriteLine(s)
+        Next
+    End Sub
+End Module
+
+'数値をループで取り出す
+Module Program
+    Sub Main(args As String())
+        For Each i In [Enum].GetValues(GetType(Color))
+            Console.WriteLine(i) '0 1 2
+        Next
+    End Sub
+End Module
