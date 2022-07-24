@@ -738,7 +738,75 @@ End Class
 'クラス（参照型）と似ている
 '値型。継承などができない
 '軽量のオブジェクトを表すのに適している
-'大量のデータを生成する場合に用いられる
+'小規模のデータであれば、処理が早い
+'継承、イベントなどができない
 
+Private Structure Users
+    Public UserID As String
+    Public Name As String
+    Public Age As Integer
+    Public Sub setUsers(ByVal setVal1 As String, ByVal setVal2 As String, ByVal setVal3 As Integer)
+        UserID = setVal1
+        Name = setVal2
+        Age = setVal3
+    End Sub
+End Structure
 
+Shared Sub Main(args As String())
+    '構造体を宣言し、初期化
+    Dim sUsers As Users
+    sUsers.setUsers("A0001", "テストユーザ1", 24)
+End Sub
 
+'---列挙型
+'複数の定数を1つにまとめる
+'列名に対応した数値を割り当てることで数値として扱える
+
+Public Enum Color
+    RED
+    YELLOW
+    BLUE
+End Enum
+
+Module Module1
+    Sub Main()
+        Console.WriteLine(Color.RED) '0が出力される
+        Console.WriteLine(Color.YELLOW) '1が出力される
+        Console.WriteLine(Color.BLUE) '2が出力される
+    End Sub
+End Module
+
+'最初の数値を１から始めたい場合
+Enum Color
+    RED = 1
+    YELLOW
+    BLUE
+End Enum
+
+Module Module1
+    Sub Main()
+        Console.WriteLine(Color.RED) '1が出力される
+        Console.WriteLine(Color.YELLOW) '2が出力される
+        Console.WriteLine(Color.BLUE) '3が出力される
+    End Sub
+End Module
+
+'数字の割り当てを任意の値にする場合
+Enum Color
+    RED = 15
+    YELLOW = -2
+    BLUE = 542
+End Enum
+
+'数値ではなく名称で出力する場合
+Enum Color
+    RED
+    YELLOW
+    BLUE
+End Enum
+
+Module Program
+    Sub Main(args As String())
+        Console.WriteLine(Color.RED.ToString)
+    End Sub
+End Module
