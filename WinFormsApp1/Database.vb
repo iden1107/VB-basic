@@ -17,3 +17,25 @@
         cnn.Close()
     End Sub
 End Class
+
+
+
+'---実際に値を取り出す
+Imports System.Data.SqlClient
+
+Public Class Form1
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim cn = New SqlConnection("Data Source=DESKTOP-RLPQ3N9\SQLEXPRESS;Initial Catalog=sample;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+        Dim SQLCm As SqlCommand = cn.CreateCommand
+
+        SQLCm.CommandText = "SELECT * FROM Table_1 WHERE Age = 34"
+        Dim Value As String
+
+        cn.Open()
+        Value = SQLCm.ExecuteScalar
+        cn.Close()
+
+        MsgBox(Value)
+    End Sub
+End Class

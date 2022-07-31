@@ -353,3 +353,7 @@ Public Class Form1
     End Sub
 
 End Class
+
+'---usingステートメント
+'使い終わったらリソースを開放する必要がある場合に、自動的にDisposeメソッドを呼び出してくれる記述形式
+'usingステートメントを使うと、try-catch-finally文のfinallyブロックを記述する必要がない

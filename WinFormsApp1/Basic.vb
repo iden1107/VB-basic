@@ -1,19 +1,7 @@
 ﻿Public Class Basic
 
 
-    'eの中身を操作
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        'eはeventArgクラス型
-        'マウスの操作はmouseEvnetArg型
-        'クラス型どうしのキャストをdirectCast()で実行する
-        Dim hoge As MouseEventArgs = DirectCast(e, MouseEventArgs)
-        Debug.WriteLine(hoge.X)
-    End Sub
-
-
-
-
-    'グローバル変数　publicは他のファイルからも参照できる。privateはclass内で参照できる
+    '---グローバル変数　publicは他のファイルからも参照できる。privateはclass内で参照できる
     Sub Main()
         Public aaa As String = "hoge"
         Private aaa As Integer = 100
@@ -23,7 +11,8 @@
     End Sub
 
 
-    '型
+
+    '---型
     Sub main()
         '変数
         Dim aaa As String = "hello world"
@@ -69,7 +58,17 @@
     End Sub
 
 
-    '配列
+
+    '---定数
+    Sub main()
+        Const XXX_YYY As String = "hoge"
+    End Sub
+
+    '---読み取り専用
+
+    Private ReadOnly XXX_YYY As String = "hoge"
+
+    '---配列
     Sub main()
         '配列
         Dim aaa(3) As String

@@ -65,6 +65,7 @@ End Module
 
 '---オーバーロード
 'パラメーターの型や数が異なれば同じメソッド名で複数定義できる
+'メンバとパラメーターの組み合わせのことを「シグネチャ」という
 Class Sample
     Public aaa As String
     '①aaaを初期化する２つのコンストラクタがある
@@ -88,6 +89,7 @@ End Module
 
 
 'オーバーロード（メソッド）
+
 Class Sample
     'bbb()と同名のメソッドが３つあるがそれぞれ引数が異なっている
     Public Sub bbb(a As Integer)
