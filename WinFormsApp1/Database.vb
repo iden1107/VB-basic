@@ -91,3 +91,63 @@ Public Class Form1
 
     End Sub
 End Class
+
+
+
+'---DataGridViewへデータを表示
+Public Class Form1
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim cn = New SqlConnection("Data Source=DESKTOP-RLPQ3N9\SQLEXPRESS;Initial Catalog=sample;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+        Dim SQLCm As SqlCommand = cn.CreateCommand
+        Dim Adapter As New SqlDataAdapter(SQLCm)
+        Dim Table As New DataTable
+
+
+        SQLCm.CommandText = "SELECT * FROM Table_1 "
+        Adapter.Fill(Table)
+
+        'テーブルに取得したデータを埋め込む
+        DataGridView1.DataSource = Table
+
+        '後処理
+        Table.Dispose()
+        Adapter.Dispose()
+        SQLCm.Dispose()
+        cn.Dispose()
+    End Sub
+End Class
+
+
+'---個々のDataRowにアクセスする方法
+Imports System.Data.SqlClient
+
+Public Class Form1
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim cn = New SqlConnection("Data Source=DESKTOP-RLPQ3N9\SQLEXPRESS;Initial Catalog=sample;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+        Dim SQLCm As SqlCommand = cn.CreateCommand
+        Dim Adapter As New SqlDataAdapter(SQLCm)
+        Dim Table As New DataTable
+        Dim x As String
+
+
+        SQLCm.CommandText = "SELECT Age FROM Table_1 "
+        Adapter.Fill(Table)
+
+        'テーブルに取得したデータを埋め込む
+        DataGridView1.DataSource = Table
+
+        'そのテーブルの1行目のAgeカラムの値を取り出しxに格納
+        x = Table.Rows(0)("Age")
+        MsgBox(x)
+
+
+        '行と列を数字でしてすることも可能
+        ' x = Table.Rows(0)(0)
+
+        '後処理
+        Table.Dispose()
+        Adapter.Dispose()
+        SQLCm.Dispose()
+        cn.Dispose()
+    End Sub
+End Class
