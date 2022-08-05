@@ -151,3 +151,36 @@ Public Class Form1
         cn.Dispose()
     End Sub
 End Class
+
+
+
+'---行の個数、列の個数
+Public Class Form1
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim cn = New SqlConnection("Data Source=DESKTOP-RLPQ3N9\SQLEXPRESS;Initial Catalog=sample;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+        Dim SQLCm As SqlCommand = cn.CreateCommand
+        Dim Adapter As New SqlDataAdapter(SQLCm)
+        Dim Table As New DataTable
+        Dim x As String
+
+
+        SQLCm.CommandText = "SELECT Age FROM Table_1 "
+        Adapter.Fill(Table)
+
+        Dim r, c As String
+
+        '行の個数
+        r = Table.Rows.Count
+        '列の個数
+        c = Table.Columes.Count
+
+        MsgBox(r & "行" & c & "列")
+
+
+        '後処理
+        Table.Dispose()
+        Adapter.Dispose()
+        SQLCm.Dispose()
+        cn.Dispose()
+    End Sub
+End Class
