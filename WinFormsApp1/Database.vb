@@ -161,7 +161,6 @@ Public Class Form1
         Dim SQLCm As SqlCommand = cn.CreateCommand
         Dim Adapter As New SqlDataAdapter(SQLCm)
         Dim Table As New DataTable
-        Dim x As String
 
 
         SQLCm.CommandText = "SELECT Age FROM Table_1 "
@@ -176,6 +175,33 @@ Public Class Form1
 
         MsgBox(r & "行" & c & "列")
 
+
+        '後処理
+        Table.Dispose()
+        Adapter.Dispose()
+        SQLCm.Dispose()
+        cn.Dispose()
+    End Sub
+End Class
+
+
+
+'-- DataTableの行に対してループ処理を行う
+Public Class Form1
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim cn = New SqlConnection("Data Source=DESKTOP-RLPQ3N9\SQLEXPRESS;Initial Catalog=sample;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+        Dim SQLCm As SqlCommand = cn.CreateCommand
+        Dim Adapter As New SqlDataAdapter(SQLCm)
+        Dim Table As New DataTable
+
+
+
+        SQLCm.CommandText = "SELECT * FROM Table_1 "
+        Adapter.Fill(Table)
+
+        For Each rowData In Table.Rows
+            Debug.WriteLine(rowData("Name").ToString)
+        Next
 
         '後処理
         Table.Dispose()
