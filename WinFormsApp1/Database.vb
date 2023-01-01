@@ -18,6 +18,28 @@
     End Sub
 End Class
 
+'---Gridへの埋め込み
+        Dim cn = New SqlConnection("Data Source=(local)\SQLEXPRESS;Initial Catalog=project_job;Persist Security Info=True;User ID=user01;Password=password")
+        Dim SQL As String = "SELECT * FROM tbl_staff"
+
+
+        cn.Open()
+
+        '接続の設定を行います。
+        Dim command As New SqlCommand(SQL, cn)
+        Dim adapter As New SqlDataAdapter(command)
+
+        'データセットに格納します。
+        Dim dt As New DataTable
+        adapter.Fill(dt)
+
+        'データグリッドビューのデータソースを設定
+        Me.DataGridView1.DataSource = dt
+
+        cn.Close()
+
+
+
 
 
 '---取得
